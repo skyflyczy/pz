@@ -6,7 +6,7 @@ PXXXXX-ZXXX 前端项目
 
 # [Philosophical Zombie](https://philosophicalzombie.ai)
 
-![](./assets/images/philosophicalzombie.png?raw=true)
+![](./src/assets/images/philosophicalzombie.png?raw=true)
 
 ## What is Philosophical Zombie?
 
