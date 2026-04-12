@@ -36,7 +36,7 @@ export const useChatStore = defineStore(
   {
     persist: {
       key: "chatPiniaStore",
-      storage: localStorage,
+      storage: sessionStorage,
     },
   },
 );
