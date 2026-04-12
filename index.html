@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/images/icon.webp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Philosophical Zombie</title>
+  <link rel="stylesheet" href="/font/iconfont/iconfont.css">
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <script type="module" src="/js/storage.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+    }
+
+    #app {
+      display: none;
+    }
+
+    .loading-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      background-color: #212121;
+    }
+
+    .loading-container .hole {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-container .hole i {
+      display: block;
+      position: absolute;
+      width: 100px;
+      height: 100px;
+
+      border-radius: 140px;
+      opacity: 0;
+      animation-name: scale;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .loading-container .hole i:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .loading-container .hole i:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .loading-container .hole i:nth-child(3) {
+      animation-delay: 0.9s;
+    }
+
+    .loading-container .hole i:nth-child(4) {
+      animation-delay: 1.2s;
+    }
+
+    .hole i:nth-child(5) {
+      animation-delay: 1.5s;
+    }
+
+    .hole i:nth-child(6) {
+      animation-delay: 1.8s;
+    }
+
+    .hole i:nth-child(7) {
+      animation-delay: 2.1s;
+    }
+
+    .hole i:nth-child(8) {
+      animation-delay: 2.4s;
+    }
+
+    .hole i:nth-child(9) {
+      animation-delay: 2.7s;
+    }
+
+    .hole i:nth-child(10) {
+      animation-delay: 3s;
+    }
+
+    @keyframes scale {
+      0% {
+        transform: scale(2);
+        opacity: 0;
+        box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
+      }
+
+      50% {
+        transform: scale(1) translate(0px, -5px);
+        opacity: 1;
+        box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.5);
+      }
+
+      100% {
+        transform: scale(0.1) translate(0px, 5px);
+        opacity: 0;
+        box-shadow: 0px 10px 20px rgba(255, 255, 255, 0);
+      }
+    }
+
+    .loading-container .progress-text {
+      position: absolute;
+      font-size: 20px;
+      color: #6a6a6a;
+      text-align: center;
+      z-index: 10;
+      font-weight: 100;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-family: "SF UI Text", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Zen Hei", sans-serif
+    }
+
+    .loading-container .pz-iconfont {
+      position: absolute;
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .loading-container icon-shengyin {
+      display: none;
+    }
+
+    .pz_toggleSwitch {
+      width: 36px;
+      height: 36px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: red;
+      border-radius: 50%;
+      cursor: pointer;
+      transition-duration: 0.3s;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+      overflow: hidden;
+      position: absolute;
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      bottom: 100px;
+      left: 50%;
+      margin-left: -18px;
+    }
+
+    #pz_checkboxInput {
+      display: none;
+    }
+
+
+    .pz_toggleSwitch .speaker {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition-duration: 0.3s;
+      opacity: 0;
+    }
+
+    .pz_toggleSwitch .speaker svg {
+      width: 18px;
+    }
+
+    .pz_toggleSwitch .mute-speaker {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      z-index: 3;
+      transition-duration: 0.3s;
+    }
+
+    .pz_toggleSwitch .mute-speaker svg {
+      width: 15px;
+    }
+
+    #pz_checkboxInput:checked+.pz_toggleSwitch {
+      background-color: #000;
+    }
+
+    #pz_checkboxInput:checked+.pz_toggleSwitch .speaker {
+      opacity: 1;
+      transition-duration: 0.3s;
+    }
+
+    #pz_checkboxInput:checked+.pz_toggleSwitch .mute-speaker {
+      opacity: 0;
+      transition-duration: 0.3s;
+    }
+
+    #pz_checkboxInput:active+.pz_toggleSwitch {
+      transform: scale(0.7);
+    }
+
+    #pz_checkboxInput:hover+.pz_toggleSwitch {
+      background-color: rgb(61, 61, 61);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading-container" id="loading-container">
+    <div class="hole">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <div class="progress-text" id="progress-text">0%</div>
+    </div>
+    <input id="pz_checkboxInput" type="checkbox" />
+  </div>
+  <div id="app"></div>
+  <script>
+    const loadingScreen = document.getElementById('loading-container');
+    const progressNum = document.getElementById('progress-text');
+    const appContainer = document.getElementById('app');
+
+    let currentProgress = 0;
+
+    function updateProgress(percent) {
+      currentProgress = Math.min(percent, 100);
+      progressNum.textContent = `${Math.round(currentProgress)}%`;
+    }
+
+    function smoothProgress(targetPercent) {
+      const duration = 1000;
+      const startTime = Date.now();
+      const startPercent = currentProgress;
+      const diff = targetPercent - startPercent;
+
+      function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = startPercent + diff * progress;
+        updateProgress(current);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      animate();
+    }
+
+    function monitorResourceLoad() {
+      if (window.location.href.includes('privacyPolicy') || window.location.href.includes('disclaimer')) {
+        loadingScreen.style.display = 'none';
+        appContainer.style.display = 'block';
+        return;
+      }
+
+      const resources = [
+        ...document.querySelectorAll('link[rel="stylesheet"]'),
+        ...document.querySelectorAll('script'),
+        ...document.querySelectorAll('img'),
+        ...document.querySelectorAll('video'),
+        ...document.querySelectorAll('audio')
+      ];
+      const total = resources.length;
+      let loaded = 0;
+      let isDOMLoaded = false;
+
+      function calculateProgress() {
+        if (total === 0) return 100;
+        const resourceProgress = (loaded / total) * 90;
+        const domProgress = isDOMLoaded ? 10 : 0;
+        return Math.min(100, resourceProgress + domProgress);
+      }
+
+      const handleResourceLoad = () => {
+        loaded++;
+        const progress = calculateProgress();
+        smoothProgress(progress);
+      };
+
+      resources.forEach(resource => {
+        if (resource.complete) {
+          loaded++;
+        } else {
+          resource.addEventListener('load', handleResourceLoad);
+          resource.addEventListener('error', handleResourceLoad);
+        }
+      });
+
+      updateProgress(0);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        isDOMLoaded = true;
+        const progress = calculateProgress();
+        smoothProgress(progress);
+      });
+
+      window.addEventListener('load', () => {
+        smoothProgress(100);
+        setTimeout(() => {
+          loadingScreen.classList.add('animate__animated', 'animate__fadeOut');
+          loadingScreen.addEventListener('animationend', () => {
+            loadingScreen.style.display = 'none';
+            appContainer.style.display = 'block';
+          }, { once: true });
+        }, 100);
+      });
+
+      setTimeout(() => {
+        const initialProgress = calculateProgress();
+        if (initialProgress > 0) {
+          smoothProgress(initialProgress);
+        }
+      }, 100);
+
+      const progressChecker = setInterval(() => {
+        const currentProgress = calculateProgress();
+        if (currentProgress < 100) {
+          smoothProgress(currentProgress);
+        } else {
+          clearInterval(progressChecker);
+        }
+      }, 500);
+    }
+
+    monitorResourceLoad();
+
+    setTimeout(() => {
+      if (loadingScreen.style.display !== 'none') {
+        updateProgress(100);
+        loadingScreen.classList.add('animate__animated', 'animate__fadeOut');
+        loadingScreen.addEventListener('animationend', () => {
+          loadingScreen.style.display = 'none';
+          appContainer.style.display = 'block';
+        }, { once: true });
+      }
+    }, 15000);
+  </script>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
