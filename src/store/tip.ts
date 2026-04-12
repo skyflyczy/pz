@@ -29,7 +29,7 @@ export const useTipStore = defineStore("tip", () => {
   const addTip = (
     message: string,
     type: TipKind = "describe",
-    txid = "",
+    txId = "",
   ): string => {
     const tip: Tip = {
       id: `${Date.now()}_${tipList.value.length}`,
@@ -38,7 +38,7 @@ export const useTipStore = defineStore("tip", () => {
       isLoad: type === "describe",
     };
     if (type === "submit") {
-      tip.txId = txid;
+      tip.txId = txId;
     }
     tipList.value.push(tip);
     return tip.id;

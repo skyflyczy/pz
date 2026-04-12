@@ -565,7 +565,21 @@ const initPage = async (): Promise<void> => {
 
   const localCache = chatStore.getChatLocalCacheList() ? chatStore.getChatLocalCacheList() : [];
   if (localCache.length > 0 && !newUser) {
-    messageListRef.value.push(...localCache);
+    const validLocalCache = localCache.map((item) => ({
+      id: item.id || Date.now().toString(),
+      isExecute: item.isExecute || false,
+      author: item.author || '',
+      time: item.time || '',
+      isWaitOnChain: item.isWaitOnChain || false,
+      showMessageContent: item.showMessageContent || '',
+      messageContent: item.messageContent || '',
+      messageType: item.messageType,
+      flag: item.flag,
+      isTyping: item.isTyping || false,
+      executeProcess: item.executeProcess,
+      modelResult: item.modelResult,
+    }));
+    messageListRef.value.push(...validLocalCache);
     await nextTick();
     await sleep(300);
     await scrollToBottom();
