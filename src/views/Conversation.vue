@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div v-if="isShowLoadingRef" class="loading-message loading-message-buttom">
+      <div v-if="showLoading" class="loading-message loading-message-buttom">
         <div class="avatar-icon">
           <img src="@/assets/images/msg_head.png" alt="user" />
         </div>
@@ -82,9 +82,9 @@
       <!-- Bottom info bar -->
       <div class="inpit-box" :class="{ 'is-focused': isInputFocusedRef }">
         <textarea type="text" v-model="inputValueRef" placeholder="Hit Enter to send. Great posts may earn bonus" maxlength="300"
-                  @keyup.enter="handleQuestion" :disabled="!isCanChatRef" @focus="isInputFocusedRef = true"
+                  @keyup.enter="handleQuestion" :disabled="!canChat" @focus="isInputFocusedRef = true"
                   @blur="isInputFocusedRef = false" />
-        <div v-if="!isCanChatRef" class="disabled-click-layer" @click="handleDisabledClick"></div>
+        <div v-if="!canChat" class="disabled-click-layer" @click="handleDisabledClick"></div>
         <div class="input-icons">
           <span class="pz-iconfont icon-voice icon-01"></span>
           <span class="pz-iconfont icon-fasong" @click="handleQuestion"></span>
@@ -184,9 +184,9 @@ interface WalletData {
 }
 
 const firstMessageValue                      = "Philosophical Zombie builds you a reusable, transferable, and evolving digital consciousness—designed to handle more personalized tasks based on your preferences.\n\nBacked by cross-disciplinary testing, the initial version takes shape after 75 to 90 days of 20 high-quality conversations each day. Every piece of data is encrypted with your signature and stored permanently on the Arweave chain. We don't cache anything. Only you can decrypt and view it.\n\nStart building now.";
-const isCanChatRef                           = ref<boolean>(false);
+const canChat                                = ref<boolean>(false);
 const inputValueRef                          = ref<string>("");
-const isShowLoadingRef                       = ref<boolean>(false);
+const showLoading                            = ref<boolean>(false);
 const isShowConnectedInfoRef                 = ref<boolean>(false);
 const isSubmittingRef                        = ref<boolean>(false);
 const txidListRef                            = ref<string[]>([]);
@@ -265,13 +265,13 @@ const aiChart = async (msg: string | null, flag: string = "dialogue"): Promise<v
     ElMessage.error("Connect Wallet First.");
     return;
   }
-  isCanChatRef.value = false;
+  canChat.value = false;
 
   let author = walletStore.walletData.address;
   if (author) author = author.slice(0, 5) + "..." + author.slice(-5);
 
   inputValueRef.value = "";
-  isShowLoadingRef.value = true;
+  showLoading.value = true;
 
   if (msg != null && msg !== "") {
     const userMessageItem = await generateMessageItem(author, false, true, msg, "user-message", msg, flag);
@@ -289,7 +289,7 @@ const aiChart = async (msg: string | null, flag: string = "dialogue"): Promise<v
     chatTime: formatTime(Date.now(), "YYYY-MM-dd HH:mm:ss")
   })
       .then(async (res) => {
-        isShowLoadingRef.value = false;
+       showLoading.value = false;
         if (res.code === 200) {
           const fullText = res.data?.content || "";
           const modelResult = res.data?.modelResult || "";
@@ -308,12 +308,12 @@ const aiChart = async (msg: string | null, flag: string = "dialogue"): Promise<v
 
           if (flag === 'dialogue') {
             isCanCallRef.value = true;
-            isCanChatRef.value = isCanCallRef.value;
+            canChat.value = isCanCallRef.value;
           }
         } else if (res.code === 201) {
           if (flag === 'dialogue') {
             isCanCallRef.value = false;
-            isCanChatRef.value = isCanCallRef.value;
+            canChat.value = isCanCallRef.value;
             if (!isCanCallRef.value) {
               await callLimitTip();
             }
@@ -321,7 +321,7 @@ const aiChart = async (msg: string | null, flag: string = "dialogue"): Promise<v
         }
       })
       .finally(() => {
-        isShowLoadingRef.value = false;
+        showLoading.value = false;
       });
 };
 
@@ -418,7 +418,7 @@ const handleContinue = (): void => {
 
 const handleSubmit = async (): Promise<void> => {
   if (isSubmittingRef.value) return;
-  if (isShowLoadingRef.value) return;
+  if (showLoading.value) return;
 
   const isConnected = await walletStore.walletConnectedStatus();
   if (!isConnected) {
@@ -440,7 +440,7 @@ const handleSubmit = async (): Promise<void> => {
   }
 
   isSubmittingRef.value = true;
-  isCanChatRef.value = false;
+  canChat.value = false;
 
   tipStore.updateCurrentTipLoad(false);
   tipStore.currentTipId = tipStore.addTip("Updating your consciousness model");
@@ -483,7 +483,7 @@ const handleSubmit = async (): Promise<void> => {
 
     if (!uploadRes) {
       isSubmittingRef.value = false;
-      isCanChatRef.value = isCanCallRef.value;
+      canChat.value = isCanCallRef.value;
       return;
     }
 
@@ -508,7 +508,7 @@ const handleSubmit = async (): Promise<void> => {
       isContinueRef.value = true;
     }
   } catch (error) {
-    isCanChatRef.value = isCanCallRef.value;
+    canChat.value = isCanCallRef.value;
     (tipStore.updateCurrentTipLoad as (isLoad: boolean) => void)(false);
   } finally {
     isSubmittingRef.value = false;
@@ -594,8 +594,8 @@ const initPage = async (): Promise<void> => {
 
     if (res.code === 200) {
       isCanCallRef.value = res.data === 1;
-      isCanChatRef.value = isCanCallRef.value;
-      if (!isCanChatRef.value) {
+      canChat.value = isCanCallRef.value;
+      if (!canChat.value) {
         await callLimitTip();
       }
     } else {
@@ -605,11 +605,11 @@ const initPage = async (): Promise<void> => {
     ElMessage.error("Failed to check chat limit. Please try again.");
   }
 
-  if (isCanChatRef.value && messageListRef.value.length > 0) {
+  if (canChat.value && messageListRef.value.length > 0) {
     const finalMsg = messageListRef.value[messageListRef.value.length - 1];
     if (finalMsg.flag === 'summary' && finalMsg.messageType === "system-message") {
       isContinueRef.value = true;
-      isCanChatRef.value = false;
+      canChat.value = false;
     }
   }
 };
@@ -644,8 +644,8 @@ const pageDataClear = (): void => {
   chatStore.clearChatLocalCache();
   messageListRef.value = [];
   isShowConnectedInfoRef.value = false;
-  isCanChatRef.value = false;
-  isShowLoadingRef.value = false;
+  canChat.value = false;
+  showLoading.value = false;
   isShowConnectedInfoRef.value = false;
   isSubmittingRef.value = false;
   isCanCallRef.value = false;
