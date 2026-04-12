@@ -1,49 +1,48 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-interface Txid {
+export interface Txid {
   arTxId: string;
   time: number;
   status: string;
 }
 
-export const useTxidListStore = defineStore(
-    "txidList",
-    () => {
-        const txidList = ref<Txid[]>([]);
+export const useTxidListStore = defineStore("txidList", () => {
+  const txidList = ref<Txid[]>([]);
 
-        // Actions
-        const clear = () => {
-            txidList.value  = []
-        }
-        const add = (arTxId: string) => {
-            txidList.value.push({
-                arTxId,
-                time: Date.now(),
-                status: 'PENDING'
-            });
-        };
-        const setList = (list: Txid[]) => {
-            txidList.value = list
-        }
-        const update = (arTxId: string, status: string) => {
-            const item = txidList.value.find((item) => item.arTxId === arTxId);
-            if (item) {
-                item.status = status;
-            }
-        };
-        const removeItem = (item: Txid) => {
-            txidList.value = txidList.value.filter((i) => i.arTxId !== item.arTxId);
-        }
+  const clear = (): void => {
+    txidList.value = [];
+  };
 
-        return {
-            txidList,
-            // Actions
-            clear,
-            add,
-            setList,
-            update,
-            removeItem,
-        };
-    },
-);
+  const add = (arTxId: string): void => {
+    txidList.value.push({
+      arTxId,
+      time: Date.now(),
+      status: "PENDING",
+    });
+  };
+
+  const setList = (list: Txid[]): void => {
+    txidList.value = list;
+  };
+
+  const update = (arTxId: string, status: string): void => {
+    const item = txidList.value.find((entry) => entry.arTxId === arTxId);
+    if (item) {
+      item.status = status;
+    }
+  };
+
+  const removeItem = (item: Txid): void => {
+    txidList.value = txidList.value.filter((i) => i.arTxId !== item.arTxId);
+  };
+
+  return {
+    txidList,
+    clear,
+    add,
+    setList,
+    update,
+    removeItem,
+  };
+});

@@ -10,9 +10,6 @@ export const useChatStore = defineStore(
   () => {
     const chatLocalCacheList = ref<ChatMessage[]>([]);
 
-    // Getters
-    // const getWalletData = computed(() => walletData.value);
-
     // Actions
     const setChatLocalCacheList = (data: ChatMessage[]) => {
       chatLocalCacheList.value = data;

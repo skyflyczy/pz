@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 
-//配置路由信息
+/** Application routes (register view components here). */
 const routes: RouteRecordRaw[] = [
 
 ];

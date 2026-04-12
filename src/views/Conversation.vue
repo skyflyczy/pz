@@ -99,11 +99,11 @@
       <div class="action-buttons">
         <pz-button class="btn-check" bg-color="var(--color-000)" text-color="var(--color-white)"
                    border-color="var(--color-white)" hover-bg-color="var(--color-white)" hover-text-color="var(--color-000)"
-                   @click="handleGoPage_onClick('Records')">
+                   @click="handleNavigateTo('Records')">
           Records
         </pz-button>
-        <pz-button class="btn-submit":disabled="isSubmittingRef">
-          <template v-if="isContuineRef">
+        <pz-button class="btn-submit" :disabled="isSubmittingRef">
+          <template v-if="isContinueRef">
             <span @click="handleContinue">Continue</span>
           </template>
           <template v-else>
@@ -120,13 +120,13 @@
 import {nextTick, onMounted, onUnmounted, ref, watch} from "vue";
 import {useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
-import {apiChatLimit, getAllTxid, saveTx, setChat} from "@/api/index.js";
-import {useWalletStore} from "@/store/wallet";
-import {useChatStore} from "@/store/chat";
-import {useTipStore} from "@/store/tip";
-import {useTxidListStore} from "@/store/txidList";
-import {formatTime, sleep} from "@/units/index.js";
-import {systemMessageAuthor} from "@/config/index.js";
+import { apiChatLimit, getAllTxid, saveTx, setChat } from "@/api";
+import { useWalletStore } from "@/store/wallet";
+import { useChatStore } from "@/store/chat";
+import { useTipStore } from "@/store/tip";
+import { useTxidListStore } from "@/store/txidList";
+import { formatTime, sleep } from "@/utils";
+import { systemMessageAuthor } from "@/config";
 import PzButton from "@/components/PzButton.vue";
 import CircleLoadingAnimation from "@/components/CircleLoadingAnimation.vue";
 import ThreePointLoadingAnimation from "@/components/ThreePointLoadingAnimation.vue";
@@ -137,7 +137,6 @@ const chatStore                              = useChatStore();
 const tipStore                               = useTipStore();
 const txidListStore                          = useTxidListStore();
 
-// 类型定义
 interface ExecuteProcessItem {
   id: string | number;
   executeContent: string;
@@ -146,7 +145,7 @@ interface ExecuteProcessItem {
 
 interface ExecuteProcess {
   list: ExecuteProcessItem[];
-  txId?: string;
+  txId?: string | '';
 }
 
 interface MessageItem {
@@ -174,7 +173,7 @@ interface TipItem {
 
 interface UploadResult {
   id: string;
-  wincs?: string | number;
+  winc?: string;
   uploadSize?: number;
 }
 
@@ -196,7 +195,7 @@ const isLoadingHistoryRef                    = ref<boolean>(false);
 const hasMoreHistoryRef                      = ref<boolean>(true);
 const tipContentContainerRef                 = ref<HTMLElement | null>(null);
 const messageListRef                         = ref<MessageItem[]>([]);
-const isContuineRef                          = ref<boolean>(false);
+const isContinueRef                          = ref<boolean>(false);
 const isInputFocusedRef                      = ref(false);
 const isCanCallRef                           = ref(false);
 
@@ -260,7 +259,7 @@ const generateMessageItem = async (
   };
 };
 
-const aiChart = async (msg: string, flag: string = "dialogue"): Promise<void> => {
+const aiChart = async (msg: string | null, flag: string = "dialogue"): Promise<void> => {
   const isConnected = await walletStore.walletConnectedStatus();
   if (!isConnected) {
     ElMessage.error("Connect Wallet First.");
@@ -274,7 +273,7 @@ const aiChart = async (msg: string, flag: string = "dialogue"): Promise<void> =>
   inputValueRef.value = "";
   isShowLoadingRef.value = true;
 
-  if (msg) {
+  if (msg != null && msg !== "") {
     const userMessageItem = await generateMessageItem(author, false, true, msg, "user-message", msg, flag);
     messageListRef.value.push(userMessageItem);
     chatStore.addChatLocalCache(userMessageItem);
@@ -408,13 +407,13 @@ const handleScroll = (event: Event): void => {
   }
 };
 
-const handleGoPage_onClick = (pageName: string): void => {
-  router.push({ name: pageName });
+const handleNavigateTo = (routeName: string): void => {
+  router.push({ name: routeName });
 };
 
 const handleContinue = (): void => {
   aiChart("", "dialogue");
-  isContuineRef.value = false;
+  isContinueRef.value = false;
 };
 
 const handleSubmit = async (): Promise<void> => {
@@ -493,7 +492,7 @@ const handleSubmit = async (): Promise<void> => {
       address: walletStore.walletData?.address,
       arTxId: uploadRes.id,
       modelResult: messageListRef.value[messageListRef.value.length - 1].modelResult,
-      gas: uploadRes.wincs,
+      gas: uploadRes.winc,
       uploadSize: uploadRes.uploadSize,
       createTime: formatTime(Date.now(), "YYYY-MM-dd HH:mm:ss")
     }).then(() => {
@@ -506,7 +505,7 @@ const handleSubmit = async (): Promise<void> => {
     tipStore.addTip("", "submit", "Arweave storage task created. A hash credential (Arweave TxID) will be provided upon completion");
 
     if (isCanCallRef.value) {
-      isContuineRef.value = true;
+      isContinueRef.value = true;
     }
   } catch (error) {
     isCanChatRef.value = isCanCallRef.value;
@@ -595,7 +594,7 @@ const initPage = async (): Promise<void> => {
   if (isCanChatRef.value && messageListRef.value.length > 0) {
     const finalMsg = messageListRef.value[messageListRef.value.length - 1];
     if (finalMsg.flag === 'summary' && finalMsg.messageType === "system-message") {
-      isContuineRef.value = true;
+      isContinueRef.value = true;
       isCanChatRef.value = false;
     }
   }
@@ -678,5 +677,5 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/styles/pagesStyle/conversation.scss";
+@import "@/assets/styles/conversation.scss";
 </style>

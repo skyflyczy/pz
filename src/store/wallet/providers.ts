@@ -18,8 +18,10 @@ export function isWalletInstalled(walletType: WalletType): boolean {
       return !!walletWindow.phantom?.solana?.isPhantom;
     case "binance":
       return !!walletWindow.binancew3w?.solana;
-    case "okx":
-      return !!walletWindow.okxwallet?.solana;
+    case "solflare":
+      return !!walletWindow.solflare;
+    case "backpack":
+      return !!walletWindow.backpack?.solana;
     default:
       return false;
   }
@@ -36,8 +38,10 @@ export function getWalletProviderByType(
       return walletWindow.phantom?.solana ?? null;
     case "binance":
       return walletWindow.binancew3w?.solana ?? null;
-    case "okx":
-      return walletWindow.okxwallet?.solana ?? null;
+    case "solflare":
+      return walletWindow.solflare ?? null;
+    case "backpack":
+      return walletWindow.backpack?.solana ?? null;
     default:
       return null;
   }

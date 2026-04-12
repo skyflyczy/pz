@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
-import binance from "@/assets/images/wallet-icon.png";
+import binance from "@/assets/images/icon-binance.png";
 import phantom from "@/assets/images/icon-phantom.png";
-import okx from "@/assets/images/icon-okx.png";
+import solflare from "@/assets/images/icon-solflare.png";
+import backpack from "@/assets/images/icon-backpack.png";
+
 import { useTipStore } from "./tip";
 import {
   getWalletProvider as getWalletProviderFromSelection,
@@ -58,10 +60,16 @@ export const useWalletStore = defineStore(
         network: "https://www.binance.com/web3wallet",
       },
       {
-        id: "okx",
-        name: "OKX Wallet",
-        icon: okx,
-        network: "https://web3.okx.com",
+        id: "solflare",
+        name: "Solflare Wallet",
+        icon: solflare,
+        network: "https://www.solflare.com/download",
+      },
+      {
+        id: "backpack",
+        name: "Backpack Wallet",
+        icon: backpack,
+        network: "https://backpack.app/download",
       },
     ]);
     const balance = ref<number>(0);
@@ -128,7 +136,6 @@ export const useWalletStore = defineStore(
         let needSignature = !walletData.value._signDerivedKey;
         if (!walletData.value.address || address !== walletData.value.address) {
           needSignature = true;
-          // console.log("Wallet connected successfully,address:",walletData.value.address);
         }
         if (needSignature) {
           walletData.value._signDerivedKey = await generateSignatureKey(
@@ -155,23 +162,18 @@ export const useWalletStore = defineStore(
             "No account found in the wallet. Please create or import one first.",
           );
         } else {
-          console.error("Wallet connection failed:", innerError);
-          console.error("Wallet error code:", innerError.code);
           ElMessage.error("Wallet connection failed.");
         }
         return false;
       }
     }
-    // 检查 SubtleCrypto 是否可用
     function isSubtleCryptoAvailable(): boolean {
       return (
         typeof window !== "undefined" && !!window.crypto && !!window.crypto.subtle
       );
     }
 
-    /**
-     * 初始化Turbo客户端，获取必要的权限和信息
-     */
+    /** Initialize the Turbo client with the connected wallet. */
     async function initTurbo(): Promise<boolean> {
       if (!isSubtleCryptoAvailable()) {
         console.warn(
@@ -211,7 +213,6 @@ export const useWalletStore = defineStore(
     > {
       const tipStore = useTipStore();
       try {
-        // 检查 SubtleCrypto 是否可用
         if (!isSubtleCryptoAvailable()) {
           ElMessage.error(
             "SubtleCrypto is unavailable. Upload functionality is disabled.",
@@ -259,7 +260,6 @@ export const useWalletStore = defineStore(
           tipStore.addFailTip("Failed:Upload failed.");
           ElMessage.error("Upload failed.");
         }
-        console.error("Upload failed:", error);
         return false;
       }
     }

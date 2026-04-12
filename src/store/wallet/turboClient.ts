@@ -18,7 +18,7 @@ async function ensureTurboLoaded(): Promise<boolean> {
     isTurboLoaded = true;
     return true;
   } catch (e) {
-    console.warn("Failed to load TurboFactory:", e);
+    console.error("Failed to load TurboFactory:", e);
     isTurboLoaded = true;
     return false;
   }

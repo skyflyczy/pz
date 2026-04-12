@@ -6,7 +6,7 @@
     </div>
     <div class="dividing-line animate__animated animate__fadeInUp animate__slow"></div>
     <div class="search-box animate__animated animate__fadeInUp animate__slow">
-      <input type="text" v-model="searchValueRef" placeholder="Search TxID" @keyup.enter="seacherData" />
+      <input type="text" v-model="searchValueRef" placeholder="Search TxID" @keyup.enter="searchData" />
     </div>
     <div class="history-table animate__animated animate__fadeInUp animate__slow">
       <div class="table-header">
@@ -82,11 +82,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick, watch } from "vue";
-import { getTableList, getTotalRevenue, apiGetTaskStatus } from "@/api/index.js";
+import { getTableList, getTotalRevenue } from "@/api";
 import { useRouter } from "vue-router";
 import { useWalletStore } from "@/store/wallet";
 import { useTxidListStore } from "@/store/txidList";
-import { TaskStatusTypes } from "@/config/index.js";
+import { TaskStatusTypes } from "@/config";
 import PzButton from "@/components/PzButton.vue";
 import ThreePointLoadingAnimation from "@/components/ThreePointLoadingAnimation.vue";
 
@@ -98,12 +98,6 @@ interface TableItem {
   bonus?: string;
   status: string;
 }
-
-interface ApiResponse {
-  code: number;
-  data: any;
-}
-
 interface TxidItem {
   arTxId: string;
   status: string;
@@ -152,7 +146,7 @@ const changePage = (page: number): void => {
   }
 };
 
-const seacherData = async (): Promise<void> => {
+const searchData = async (): Promise<void> => {
   currentPage.value = 1;
   getData();
 };
@@ -209,33 +203,33 @@ watch(
   { immediate: false },
 );
 
-// 监听全局txid列表变化，同步更新本页状态
 watch(
   () => txidListStore.txidList,
   (newTxidList: TxidItem[]) => {
     if (tableList.value.length === 0) return;
-    
-    // 创建txid到状态的映射
+
     const statusMap = new Map<string, string>();
-    newTxidList.forEach(item => {
+    newTxidList.forEach((item) => {
       statusMap.set(item.arTxId, item.status);
     });
-    
-    // 更新本页数据的状态
+
     let hasChanges = false;
-    tableList.value.forEach(item => {
-      if (statusMap.has(item.arTxId) && item.status !== statusMap.get(item.arTxId) && item.status === TaskStatusTypes.PENDING) {
+    tableList.value.forEach((item) => {
+      if (
+        statusMap.has(item.arTxId) &&
+        item.status !== statusMap.get(item.arTxId) &&
+        item.status === TaskStatusTypes.PENDING
+      ) {
         item.status = statusMap.get(item.arTxId) || item.status;
         hasChanges = true;
       }
     });
-    
-    // 触发状态更新
+
     if (hasChanges) {
       tableList.value = [...tableList.value];
     }
   },
-  { deep: true }
+  { deep: true },
 );
 
 const initPage = async (): Promise<void> => {

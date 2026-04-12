@@ -1,4 +1,4 @@
-export type WalletType = "phantom" | "binance" | "okx";
+export type WalletType = "phantom" | "binance" | "solflare" | "backpack";
 
 export type SolanaWalletProvider = {
   isConnected: boolean;
@@ -14,7 +14,8 @@ export type SolanaWalletProvider = {
 export type WalletWindow = Window & {
   phantom?: { solana?: SolanaWalletProvider & { isPhantom?: boolean } };
   binancew3w?: { solana?: SolanaWalletProvider };
-  okxwallet?: { solana?: SolanaWalletProvider };
+  solflare?: SolanaWalletProvider;
+  backpack?: { solana?: SolanaWalletProvider };
 };
 
 export interface Wallet {
