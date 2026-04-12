@@ -3,3 +3,20 @@ PXXXXX-ZXXX 前端项目
 2、您的训练的意识数据完全存储在Arweave链，项目方确保不保存任何您的意识数据，只保存Arweave链的TxID，供您使用与获取。
 3、项目方利用您的钱包地址签名作为密钥进行加解密，确保您的数据安全和隐私。
 4、具体的加解密方法通过此开源项目已经公开，您可以查看代码了解详细的加解密流程和算法实现。
+
+# [Philosophical Zombie](https://philosophicalzombie.ai)
+
+![](./assets/images/philosophicalzombie.png?raw=true)
+
+## What is Philosophical Zombie?
+
+Philosophical Zombie is XXX
+
+## NOTE
+1、此项目开源部分旨在标明项目方不保存户隐私数据，且不使用任何第三方 SDK 进行数据收集和分析。项目方承诺不收集用户的个人信息、设备信息、位置信息等敏感数据，并且不将用户数据发送到任何第三方服务器。用户可以放心使用该项目，享受安全、隐私保护的前端体验。
+2、您的训练的意识数据完全存储在Arweave链，项目方确保不保存任何您的意识数据，只保存Arweave链的TxID，供您使用与获取。
+3、项目方利用您的钱包地址签名作为密钥进行加解密，确保您的数据安全和隐私。
+4、具体的加解密方法通过此开源项目已经公开，您可以查看代码了解详细的加解密流程和算法实现。
+
+## Support
+如果你在使用[Philosophical Zombie](https://philosophicalzombie.ai)过程中遇到任何问题，欢迎通过以下方式联系我们：xxx   
