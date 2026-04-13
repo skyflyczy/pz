@@ -123,6 +123,6 @@ export async function getHistoryByTxid(
 ```
 
 ## Support
-如果你在使用[Philosophical Zombie](https://philosophicalzombie.ai)过程中遇到任何问题，欢迎通过以下方式联系我们:[Website][https://philosophicalzombie.ai] | [Twitter][https://x.com/PHIZOMBUILD] | [Email][philosophicalzombiebuild@gmail.com]
+如果你在使用[Philosophical Zombie](https://philosophicalzombie.ai)过程中遇到任何问题，欢迎通过以下方式联系我们:[Website](https://philosophicalzombie.ai) | [Twitter](https://x.com/PHIZOMBUILD) | [philosophicalzombiebuild@gmail.com]
 
 
