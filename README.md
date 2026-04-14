@@ -11,11 +11,9 @@
 4. The specific encryption and decryption methods have been made publicly available through this open-source project. You are welcome to review the code to understand the detailed encryption/decryption workflow and algorithm implementation.
 
 ## Workflow
-![](./src/assets/images/workflow.jpg?raw=true)
+![](./src/assets/images/workflow.png?raw=true)
 
-
-## 工作原理
-
+## How It Works?
 
 ## Code Examples
 ```js
@@ -64,7 +62,6 @@ const handleSubmit = async (): Promise<void> => {
     }
 };
 ```
-
 ```js
 /**
  * Fetch historical messages based on the provided page number.
@@ -128,6 +125,6 @@ export async function getHistoryByTxid(
 ```
 
 ## Support
-如果你在使用[Philosophical Zombie](https://philosophicalzombie.ai)过程中遇到任何问题，欢迎通过以下方式联系我们:[Website](https://philosophicalzombie.ai) | [Twitter](https://x.com/PHIZOMBUILD) | [philosophicalzombiebuild@gmail.com]
+If you encounter any issues while using [Philosophical Zombie](https://philosophicalzombie.ai),feel free to reach out to us through the following channels:[Website](https://philosophicalzombie.ai) | [Twitter](https://x.com/PHIZOMBUILD) | [philosophicalzombiebuild@gmail.com]
 
 

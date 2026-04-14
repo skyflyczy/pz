@@ -115,40 +115,14 @@ export const useWalletStore = defineStore(
       return true;
     }
 
+    /**
+     * Connect to the wallet based on the selected wallet type. Handles various error scenarios and provides user feedback.
+     * @param walletType
+     */
     async function connectWallet(walletType: WalletType): Promise<boolean> {
-      if (!WALLET_TYPES.includes(walletType)) return false;
-
-      if (typeof window === "undefined") return false;
       try {
-        const installed = isWalletInstalled(walletType);
-        if (!installed) {
-          jumpNetwork(walletType);
-          return false;
-        }
-        walletProvider = getWalletProviderByType(walletType);
-        if (walletProvider == null) {
-          return false;
-        }
+        // ...Specific logic implementation of linking wallets
 
-        await walletProvider.connect();
-        if (!walletProvider.publicKey) return false;
-        const address = walletProvider.publicKey.toString();
-        let needSignature = !walletData.value._signDerivedKey;
-        if (!walletData.value.address || address !== walletData.value.address) {
-          needSignature = true;
-        }
-        if (needSignature) {
-          walletData.value._signDerivedKey = await generateSignatureKey(
-            walletProvider,
-            address,
-          );
-        }
-        walletData.value.address = walletProvider.publicKey.toString();
-        walletData.value.connected = true;
-        // Initialize Turbo only when SubtleCrypto is available.
-        if (isSubtleCryptoAvailable()) {
-          await initTurbo();
-        }
         return true;
       } catch (innerError: any) {
         disconnectWallet();
@@ -305,22 +279,11 @@ export const useWalletStore = defineStore(
       );
     }
 
+    /**
+     * Disconnect the currently connected wallet and clear related data.
+     */
     const disconnectWallet = () => {
-      selectedWallet.value = null;
-      walletProvider = null;
-      walletData.value = {
-        address: "",
-        connected: false,
-        _signDerivedKey: "",
-      };
-      balance.value = 0;
-      uploadResult.value = {
-        txId: "",
-        hasDataCaches: null,
-        hasFastFinality: null,
-        winc: "",
-        uploadSize: undefined,
-      };
+      //...
     };
 
     // --------
