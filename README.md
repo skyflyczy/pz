@@ -33,7 +33,7 @@ The calculation is inspired by Integrated Information Theory (IIT): a system's l
 ### Blockchain‑Backed Permanent Storage
 Every snapshot is encrypted on the client side using AES‑256‑GCM, then permanently stored on the Arweave blockchain. You receive a unique Arweave transaction ID (uxid). No one—including the project team—can decrypt your data without your private key.
 
-## How It Works?
+## What does it do?
 Once your consciousness model reaches maturity (measured by its Φ value), it becomes a digital extension of you—fully existing in the digital realm. It will operate using your own thinking patterns, habits, and preferences to handle most of your tasks and decisions—communication, collaboration, decision-making, learning, companionship, and more—unlocking exponential gains in efficiency. Ultimately, it offers you a path toward persistent digital existence.
 
 ## Code Examples
