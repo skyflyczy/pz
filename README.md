@@ -2,19 +2,22 @@
 
 ## What is Philosophical Zombie?
 
-Philosophical Zombie is XXX
+[Philosophical Zombie](https://philosophicalzombie.ai) is a reusable, portable, and continuously evolving agentic model—its name draws from the famous philosophical zombie thought experiment. Unlike generic AI models, Philosophical Zombie focuses exclusively on consciousness modeling. Through deep conversation with you, it constructs your consciousness model on the blockchain. That model is your personal digital asset, and its data sovereignty rests entirely with you.
 
-## NOTE
-1、此项目开源部分旨在标明项目方不保存户隐私数据，且不使用任何第三方 SDK 进行数据收集和分析。项目方承诺不收集用户的个人信息、设备信息、位置信息等敏感数据，并且不将用户数据发送到任何第三方服务器。用户可以放心使用该项目，享受安全、隐私保护的前端体验。  
-2、您的训练的意识数据完全存储在Arweave链，项目方确保不保存任何您的意识数据，只保存Arweave链的TxID，供您使用与获取。  
-3、项目方利用您的钱包地址签名作为密钥进行加解密，确保您的数据安全和隐私。  
-4、具体的加解密方法通过此开源项目已经公开，您可以查看代码了解详细的加解密流程和算法实现。  
+## Note
+1. The open-source portion of this project is intended to demonstrate that the project team does not store user privacy data, nor does it use any third-party SDKs for data collection or analysis. The project team commits to not collecting users' personal information, device information, location information, or any other sensitive data, and will not transmit user data to any third-party servers. Users can use this project with confidence, enjoying a secure and privacy-protected front-end experience.  
+2. Your trained consciousness data is stored entirely on the Arweave blockchain. The project team ensures that none of your consciousness data is retained on its servers — only the Arweave transaction IDs (TxIDs) are stored, allowing you to access and retrieve your data.  
+3. The project team utilizes your wallet address signature as the encryption key for data encryption and decryption, ensuring the security and privacy of your data.  
+4. The specific encryption and decryption methods have been made publicly available through this open-source project. You are welcome to review the code to understand the detailed encryption/decryption workflow and algorithm implementation.
 
-## WORKFLOW
-![](./src/assets/images/mermaid-diagram.svg?raw=true)
+## Workflow
+![](./src/assets/images/workflow.jpg?raw=true)
 
 
-## CODE EXAMPLES
+## 工作原理
+
+
+## Code Examples
 ```js
 /**
  * Handle the submission of consciousness data to the blockchain.
