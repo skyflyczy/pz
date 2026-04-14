@@ -5,15 +5,36 @@
 [Philosophical Zombie](https://philosophicalzombie.ai) is a reusable, portable, and continuously evolving agentic model—its name draws from the famous philosophical zombie thought experiment. Unlike generic AI models, Philosophical Zombie focuses exclusively on consciousness modeling. Through deep conversation with you, it constructs your consciousness model on the blockchain. That model is your personal digital asset, and its data sovereignty rests entirely with you.
 
 ## Note
-1. The open-source portion of this project is intended to demonstrate that the project team does not store user privacy data, nor does it use any third-party SDKs for data collection or analysis. The project team commits to not collecting users' personal information, device information, location information, or any other sensitive data, and will not transmit user data to any third-party servers. Users can use this project with confidence, enjoying a secure and privacy-protected front-end experience.  
-2. Your trained consciousness data is stored entirely on the Arweave blockchain. The project team ensures that none of your consciousness data is retained on its servers — only the Arweave transaction IDs (TxIDs) are stored, allowing you to access and retrieve your data.  
-3. The project team utilizes your wallet address signature as the encryption key for data encryption and decryption, ensuring the security and privacy of your data.  
-4. The specific encryption and decryption methods have been made publicly available through this open-source project. You are welcome to review the code to understand the detailed encryption/decryption workflow and algorithm implementation.
+· The open-source portion of this project is intended to demonstrate that the project team does not store user privacy data, nor does it use any third-party SDKs for data collection or analysis. The project team commits to not collecting users' personal information, device information, location information, or any other sensitive data, and will not transmit user data to any third-party servers. Users can use this project with confidence, enjoying a secure and privacy-protected front-end experience.  
+· Your trained consciousness data is stored entirely on the Arweave blockchain. The project team ensures that none of your consciousness data is retained on its servers — only the Arweave transaction IDs (TxIDs) are stored, allowing you to access and retrieve your data.  
+· The project team utilizes your wallet address signature as the encryption key for data encryption and decryption, ensuring the security and privacy of your data.  
+· The specific encryption and decryption methods have been made publicly available through this open-source project. You are welcome to review the code to understand the detailed encryption/decryption workflow and algorithm implementation.
 
 ## Workflow
 ![](./src/assets/images/workflow.png?raw=true)
 
 ## How It Works?
+The system is structured into four layers: the Consciousness Probe, Multi‑Dimensional Feature Extraction, the Φ‑value calculation system, and blockchain‑backed permanent storage.
+### The Consciousness Probe
+Philosophical Zombie doesn't just sit there waiting for instructions. It actively, but gently, explores your inner world. It asks open‑ended questions—not to collect facts, but to surface how you feel, what you value, how you reason, and what your ethical intuitions look like. It never uses multiple‑choice or fill‑in‑the‑blank questions. Every question is natural, context‑aware, and flows from the real conversation you're already having. The goal isn't to interview you. It's to understand you—gradually, deeply, and without breaking the natural rhythm of the conversation.
+### Multi‑Dimensional Feature Extraction
+As you talk, the model pulls out 12 basic signals in real time. These aren't arbitrary. They're grounded in established frameworks from psychology, philosophy, and cognitive science:  
+Depth of self‑reflection  
+Emotional expression and regulation  
+Logical reasoning and abstract thinking  
+Social and group awareness  
+Ethical judgment and value conflict recognition  
+Structured thinking, curiosity, and creative expression  
+These signals then go through a set of formulas designed by researchers across seven disciplines, producing over 60 sub‑dimensions across six domains: philosophy, psychology, sociology, cognitive science, ethics, and mathematics. Each sub‑dimension has its own symbolic identifier (for example, Φₑᵥ for emotional valence), along with a numerical value and a dynamic error range. The result is a structured, multi‑dimensional snapshot of your current conscious state.
+### The Φ‑Value Calculation System
+The Φ value is the core quantitative metric of the whole model. It stands for Consciousness Integration Index. It's not a simple average. Instead, it measures how tightly coupled your emotional, personality, value, and cognitive dimensions are.  
+The calculation is inspired by Integrated Information Theory (IIT): a system's level of consciousness depends on how irreducibly its parts integrate information. In simpler terms, the higher your Φ, the more your different conscious dimensions behave like a single, indivisible whole—rather than a loose collection of isolated traits.  
+Φ is not static. After each conversation, it's recalculated based on the newly extracted features and shown in your Consciousness Snapshot Report. You can watch your integration level evolve over time and across conversations.  
+### Blockchain‑Backed Permanent Storage
+Every snapshot is encrypted on the client side using AES‑256‑GCM, then permanently stored on the Arweave blockchain. You receive a unique Arweave transaction ID (uxid). No one—including the project team—can decrypt your data without your private key.
+
+## How It Works?
+Once your consciousness model reaches maturity (measured by its Φ value), it becomes a digital extension of you—fully existing in the digital realm. It will operate using your own thinking patterns, habits, and preferences to handle most of your tasks and decisions—communication, collaboration, decision-making, learning, companionship, and more—unlocking exponential gains in efficiency. Ultimately, it offers you a path toward persistent digital existence.
 
 ## Code Examples
 ```js
