@@ -5,10 +5,10 @@
 [Philosophical Zombie](https://philosophicalzombie.ai) is a reusable, portable, and continuously evolving agentic model—its name draws from the famous philosophical zombie thought experiment. Unlike generic AI models, Philosophical Zombie focuses exclusively on consciousness modeling. Through deep conversation with you, it constructs your consciousness model on the blockchain. That model is your personal digital asset, and its data sovereignty rests entirely with you.
 
 ## Note
-· The open-source portion of this project is intended to demonstrate that the project team does not store user privacy data, nor does it use any third-party SDKs for data collection or analysis. The project team commits to not collecting users' personal information, device information, location information, or any other sensitive data, and will not transmit user data to any third-party servers. Users can use this project with confidence, enjoying a secure and privacy-protected front-end experience.  
-· Your trained consciousness data is stored entirely on the Arweave blockchain. The project team ensures that none of your consciousness data is retained on its servers — only the Arweave transaction IDs (TxIDs) are stored, allowing you to access and retrieve your data.  
-· The project team utilizes your wallet address signature as the encryption key for data encryption and decryption, ensuring the security and privacy of your data.  
-· The specific encryption and decryption methods have been made publicly available through this open-source project. You are welcome to review the code to understand the detailed encryption/decryption workflow and algorithm implementation.
+- The open-source portion of this project is intended to demonstrate that the project team does not store user privacy data, nor does it use any third-party SDKs for data collection or analysis. The project team commits to not collecting users' personal information, device information, location information, or any other sensitive data, and will not transmit user data to any third-party servers. Users can use this project with confidence, enjoying a secure and privacy-protected front-end experience.  
+- Your trained consciousness data is stored entirely on the Arweave blockchain. The project team ensures that none of your consciousness data is retained on its servers — only the Arweave transaction IDs (TxIDs) are stored, allowing you to access and retrieve your data.  
+- The project team utilizes your wallet address signature as the encryption key for data encryption and decryption, ensuring the security and privacy of your data.  
+- The specific encryption and decryption methods have been made publicly available through this open-source project. You are welcome to review the code to understand the detailed encryption/decryption workflow and algorithm implementation.
 
 ## Workflow
 ![](./src/assets/images/workflow.png?raw=true)
