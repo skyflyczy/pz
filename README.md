@@ -19,17 +19,17 @@ The system is structured into four layers: the Consciousness Probe, Multi‑Dime
 Philosophical Zombie doesn't just sit there waiting for instructions. It actively, but gently, explores your inner world. It asks open‑ended questions—not to collect facts, but to surface how you feel, what you value, how you reason, and what your ethical intuitions look like. It never uses multiple‑choice or fill‑in‑the‑blank questions. Every question is natural, context‑aware, and flows from the real conversation you're already having. The goal isn't to interview you. It's to understand you—gradually, deeply, and without breaking the natural rhythm of the conversation.
 ### Multi‑Dimensional Feature Extraction
 As you talk, the model pulls out 12 basic signals in real time. These aren't arbitrary. They're grounded in established frameworks from psychology, philosophy, and cognitive science:  
-Depth of self‑reflection  
-Emotional expression and regulation  
-Logical reasoning and abstract thinking  
-Social and group awareness  
-Ethical judgment and value conflict recognition  
-Structured thinking, curiosity, and creative expression  
-These signals then go through a set of formulas designed by researchers across seven disciplines, producing over 60 sub‑dimensions across six domains: philosophy, psychology, sociology, cognitive science, ethics, and mathematics. Each sub‑dimension has its own symbolic identifier (for example, Φₑᵥ for emotional valence), along with a numerical value and a dynamic error range. The result is a structured, multi‑dimensional snapshot of your current conscious state.
+- Depth of self‑reflection  
+- Emotional expression and regulation  
+- Logical reasoning and abstract thinking  
+- Social and group awareness  
+- Ethical judgment and value conflict recognition  
+- Structured thinking, curiosity, and creative expression  
+- These signals then go through a set of formulas designed by researchers across seven disciplines, producing over 60 sub‑dimensions across six domains: philosophy, psychology, sociology, cognitive science, ethics, and mathematics. Each sub‑dimension has its own symbolic identifier (for example, Φₑᵥ for emotional valence), along with a numerical value and a dynamic error range. The result is a structured, multi‑dimensional snapshot of your current conscious state.
 ### The Φ‑Value Calculation System
-The Φ value is the core quantitative metric of the whole model. It stands for Consciousness Integration Index. It's not a simple average. Instead, it measures how tightly coupled your emotional, personality, value, and cognitive dimensions are.  
-The calculation is inspired by Integrated Information Theory (IIT): a system's level of consciousness depends on how irreducibly its parts integrate information. In simpler terms, the higher your Φ, the more your different conscious dimensions behave like a single, indivisible whole—rather than a loose collection of isolated traits.  
-Φ is not static. After each conversation, it's recalculated based on the newly extracted features and shown in your Consciousness Snapshot Report. You can watch your integration level evolve over time and across conversations.  
+- The Φ value is the core quantitative metric of the whole model. It stands for Consciousness Integration Index. It's not a simple average. Instead, it measures how tightly coupled your emotional, personality, value, and cognitive dimensions are.  
+- The calculation is inspired by Integrated Information Theory (IIT): a system's level of consciousness depends on how irreducibly its parts integrate information. In simpler terms, the higher your Φ, the more your different conscious dimensions behave like a single, indivisible whole—rather than a loose collection of isolated traits.  
+- Φ is not static. After each conversation, it's recalculated based on the newly extracted features and shown in your Consciousness Snapshot Report. You can watch your integration level evolve over time and across conversations.  
 ### Blockchain‑Backed Permanent Storage
 Every snapshot is encrypted on the client side using AES‑256‑GCM, then permanently stored on the Arweave blockchain. You receive a unique Arweave transaction ID (uxid). No one—including the project team—can decrypt your data without your private key.
 
