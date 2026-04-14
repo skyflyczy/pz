@@ -1,6 +1,6 @@
-export type WalletType = "phantom" | "binance" | "solflare" | "backpack";
+export type WalletType = "" ;//| "phantom" | "binance" | "solflare" | "backpack",| "metamask" ;
 
-export type SolanaWalletProvider = {
+export type WalletProvider = {
   isConnected: boolean;
   publicKey: { toString(): string } | null;
   connect: () => Promise<void>;
@@ -12,10 +12,7 @@ export type SolanaWalletProvider = {
 };
 
 export type WalletWindow = Window & {
-  phantom?: { solana?: SolanaWalletProvider & { isPhantom?: boolean } };
-  binancew3w?: { solana?: SolanaWalletProvider };
-  solflare?: SolanaWalletProvider;
-  backpack?: { solana?: SolanaWalletProvider };
+  //...
 };
 
 export interface Wallet {

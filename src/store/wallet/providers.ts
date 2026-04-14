@@ -1,5 +1,5 @@
 import type {
-  SolanaWalletProvider,
+  WalletProvider,
   Wallet,
   WalletType,
   WalletWindow,
@@ -10,48 +10,19 @@ function getWalletWindow(): WalletWindow | null {
 }
 
 export function isWalletInstalled(walletType: WalletType): boolean {
-  const walletWindow = getWalletWindow();
-  if (!walletWindow) return false;
-
-  switch (walletType) {
-    case "phantom":
-      return !!walletWindow.phantom?.solana?.isPhantom;
-    case "binance":
-      return !!walletWindow.binancew3w?.solana;
-    case "solflare":
-      return !!walletWindow.solflare;
-    case "backpack":
-      return !!walletWindow.backpack?.solana;
-    default:
-      return false;
-  }
+  //...
 }
 
 export function getWalletProviderByType(
   walletType: WalletType,
-): SolanaWalletProvider | null {
-  const walletWindow = getWalletWindow();
-  if (!walletWindow) return null;
-
-  switch (walletType) {
-    case "phantom":
-      return walletWindow.phantom?.solana ?? null;
-    case "binance":
-      return walletWindow.binancew3w?.solana ?? null;
-    case "solflare":
-      return walletWindow.solflare ?? null;
-    case "backpack":
-      return walletWindow.backpack?.solana ?? null;
-    default:
-      return null;
-  }
+): WalletProvider | null {
+ //...
 }
 
 export function getWalletProvider(
   selectedWallet: Wallet | null,
-): SolanaWalletProvider | null {
-  if (!selectedWallet) return null;
-  return getWalletProviderByType(selectedWallet.id);
+): WalletProvider | null {
+ //...
 }
 
 export function getWalletNetwork(

@@ -1,5 +1,5 @@
 import CryptoJS from "crypto-js";
-import type { SolanaWalletProvider } from "./types";
+import type { WalletProvider } from "./types";
 
 export function normalizeSignatureBytes(
   signature: Uint8Array | ArrayLike<number>,
@@ -16,13 +16,9 @@ export function bytesToHex(bytes: ArrayLike<number>): string {
 }
 
 export async function generateSignatureKey(
-  provider: SolanaWalletProvider,
+  provider: WalletProvider,
   address: string,
 ): Promise<string> {
-  const msgBytes = new TextEncoder().encode(address);
-  const { signature } = await provider.signMessage(msgBytes, "utf8");
-  const signatureBytes = normalizeSignatureBytes(signature);
-  const sigHex = bytesToHex(signatureBytes);
-  return CryptoJS.SHA256(sigHex).toString();
+ //... Generate a unique message to sign, incorporating the address
 }
 

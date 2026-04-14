@@ -1,6 +1,4 @@
-import { PublicKey } from "@solana/web3.js";
-import type { SolanaWalletProvider, Tag, TurboUploadResult } from "./types";
-import { normalizeSignatureBytes } from "./signatureKey";
+import type { WalletProvider, Tag, TurboUploadResult } from "./types";
 
 let TurboFactory: any = null;
 let isTurboLoaded = false;
@@ -24,38 +22,24 @@ async function ensureTurboLoaded(): Promise<boolean> {
   }
 }
 
+/**
+ * Initializes the Turbo client with the provided wallet provider and address.
+ * @param provider
+ * @param address
+ */
 export async function initTurbo(
-  provider: SolanaWalletProvider,
+  provider: WalletProvider,
   address: string,
 ): Promise<boolean> {
   if (!isSubtleCryptoAvailable()) return false;
-  const loaded = await ensureTurboLoaded();
-  if (!loaded || !TurboFactory) return false;
-
-  const publicKey = new PublicKey(address);
-  const walletAdapter = {
-    publicKey,
-    signMessage: async (messageBytes: Uint8Array) => {
-      const { signature } = await provider.signMessage(messageBytes, "utf8");
-      return normalizeSignatureBytes(signature);
-    },
-    signTransaction: async (transaction: unknown) => {
-      return await provider.signTransaction(transaction);
-    },
-  };
-
-  turboInstance = TurboFactory.authenticated({
-    token: "solana",
-    walletAdapter,
-    gatewayUrl: "https://rpc.ankr.com/solana",
-  });
+  //... Ensure TurboFactory is loaded
   return true;
 }
 
 export async function uploadFile(
   data: string,
   tags: Tag[],
-  provider: SolanaWalletProvider,
+  provider: WalletProvider,
   address: string,
 ): Promise<
   | (TurboUploadResult & {
@@ -79,7 +63,7 @@ export async function uploadFile(
   const defaultTags: Tag[] = [
     { name: "Content-Type", value: "text/plain; charset=utf-8" },
     { name: "Upload-Type", value: "encrypted-text" },
-    { name: "Upload-From", value: "_localhost_test" },
+    { name: "Upload-From", value: "Philosophical_Zombie" },
   ];
 
   const mergedTags = [...defaultTags, ...tags];

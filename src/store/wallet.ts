@@ -1,24 +1,18 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
-import binance from "@/assets/images/icon-binance.png";
-import phantom from "@/assets/images/icon-phantom.png";
-import solflare from "@/assets/images/icon-solflare.png";
-import backpack from "@/assets/images/icon-backpack.png";
 
 import { useTipStore } from "./tip";
 import {
   getWalletProvider as getWalletProviderFromSelection,
   getWalletProviderByType,
-  isWalletInstalled,
   openWalletNetwork,
 } from "@/store/wallet/providers";
-import { generateSignatureKey } from "./wallet/signatureKey";
 import { initTurbo as initTurboClient, uploadFile as uploadFileClient } from "./wallet/turboClient";
 import { getHistoryByTxid as getHistoryByTxidClient } from "./wallet/history";
 import { aesDecrypt as aesDecryptImpl, aesEncrypt as aesEncryptImpl } from "./wallet/crypto";
 import type {
-  SolanaWalletProvider,
+  WalletProvider,
   Tag,
   TurboUploadResult,
   UploadResult,
@@ -27,7 +21,6 @@ import type {
   WalletType,
 } from "./wallet/types";
 
-const WALLET_TYPES: WalletType[] = ["phantom", "binance", "okx"];
 
 export const useWalletStore = defineStore(
   "wallet",
@@ -39,39 +32,14 @@ export const useWalletStore = defineStore(
     });
 
 
-    let walletProvider: SolanaWalletProvider | null = null;
+    let walletProvider: WalletProvider | null = null;
     const uploadResult = ref<UploadResult>({
       txId: "",
       hasDataCaches: null,
       hasFastFinality: null,
       winc: "",
     });
-    const wallets = ref<Wallet[]>([
-      {
-        id: "phantom",
-        name: "Phantom Wallet",
-        icon: phantom,
-        network: "https://phantom.com",
-      },
-      {
-        id: "binance",
-        name: "Binance Wallet",
-        icon: binance,
-        network: "https://www.binance.com/web3wallet",
-      },
-      {
-        id: "solflare",
-        name: "Solflare Wallet",
-        icon: solflare,
-        network: "https://www.solflare.com/download",
-      },
-      {
-        id: "backpack",
-        name: "Backpack Wallet",
-        icon: backpack,
-        network: "https://backpack.app/download",
-      },
-    ]);
+    const wallets = ref<Wallet[]>([]);// Initialize with empty array or predefined wallets based on your requirements
     const balance = ref<number>(0);
 
     // Getters
@@ -99,7 +67,7 @@ export const useWalletStore = defineStore(
       openWalletNetwork(wallets.value, walletType);
     }
 
-    function getWalletProvider(): SolanaWalletProvider | null {
+    function getWalletProvider(): WalletProvider | null {
       return getWalletProviderFromSelection(selectedWallet.value);
     }
 
