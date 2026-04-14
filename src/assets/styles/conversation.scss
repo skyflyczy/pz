@@ -468,7 +468,6 @@ footer {
     textarea:hover:not(:disabled)~.input-icons .icon-fasong {
       color: #833DF1;
     }
-    // 若是禁用状态，图标颜色不会改变，且点击后也不会发送消息
     textarea:disabled~.input-icons .icon-voice,
     textarea:disabled~.input-icons .icon-fasong {
       cursor: not-allowed;

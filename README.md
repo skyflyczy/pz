@@ -12,6 +12,10 @@ Philosophical Zombie is XXX
 3、项目方利用您的钱包地址签名作为密钥进行加解密，确保您的数据安全和隐私。  
 4、具体的加解密方法通过此开源项目已经公开，您可以查看代码了解详细的加解密流程和算法实现。  
 
+## WORKFLOW
+![](./src/assets/images/mermaid-diagram.svg?raw=true)
+
+
 ## CODE EXAMPLES
 ```js
 /**
