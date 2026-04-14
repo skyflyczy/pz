@@ -1,6 +1,4 @@
-# [Philosophical Zombie](https://philosophicalzombie.ai)
-
-![](./src/assets/images/philosophicalzombie.png?raw=true)
+![](./src/assets/images/philosophicalzombie.JPEG?raw=true)
 
 ## What is Philosophical Zombie?
 
